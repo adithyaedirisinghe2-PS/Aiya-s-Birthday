@@ -53,21 +53,52 @@ window.addEventListener('resize', () => {
 });
 
 // App Settings & Controls
-const bgMusic = document.getElementById('bgMusic');
 const popSound = document.getElementById('popSound');
-if (bgMusic) bgMusic.volume = 0.4;
 if (popSound) popSound.volume = 0.6;
 let isMuted = false;
+
+let ytPlayer;
+let playerReady = false;
+let shouldPlay = false;
+
+function onYouTubeIframeAPIReady() {
+    ytPlayer = new YT.Player('ytPlayer', {
+        height: '0',
+        width: '0',
+        videoId: '57jZJ2QpKRg',
+        playerVars: {
+            'autoplay': 0,
+            'controls': 0,
+            'loop': 1,
+            'playlist': '57jZJ2QpKRg'
+        },
+        events: {
+            'onReady': (event) => {
+                playerReady = true;
+                event.target.setVolume(40);
+                if (isMuted) event.target.mute();
+                if (shouldPlay) event.target.playVideo();
+            }
+        }
+    });
+}
 
 document.getElementById('startBtn').addEventListener('click', () => {
     document.getElementById('introScreen').classList.add('hidden');
     document.getElementById('mainContent').classList.remove('hidden');
-    if (bgMusic) bgMusic.play().catch(e => console.log('Audio Autoplay Blocked'));
+    if (playerReady && ytPlayer && ytPlayer.playVideo) {
+        ytPlayer.playVideo();
+    } else {
+        shouldPlay = true;
+    }
 });
 
 document.getElementById('muteBtn').addEventListener('click', (e) => {
     isMuted = !isMuted;
-    if (bgMusic) bgMusic.muted = isMuted;
+    if (playerReady && ytPlayer && ytPlayer.mute) {
+        if (isMuted) ytPlayer.mute();
+        else ytPlayer.unMute();
+    }
     e.target.innerText = isMuted ? '🔇' : '🔊';
 });
 
