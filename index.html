@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Aiya ❤️</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&family=Playfair+Display:ital,wght@1,600&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+
+<body>
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="popSound">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-pop-01-2899.mp3" type="audio/mpeg">
+    </audio>
+
+    <canvas id="particleCanvas"></canvas>
+
+    <div id="introScreen" class="screen active">
+        <h1 class="glow-text">For my brother, Aiya</h1>
+        <button id="startBtn" class="futuristic-btn">Start Celebration ✨</button>
+    </div>
+
+    <div id="mainContent" class="screen hidden">
+        <button id="muteBtn" class="icon-btn">🔊</button>
+
+        <div class="nav-dots">
+            <span class="dot active" onclick="scrollToSection('cardSection')" title="Birthday Card"></span>
+            <span class="dot" onclick="scrollToSection('cakeSection')" title="Interactive Cake"></span>
+            <span class="dot" onclick="scrollToSection('balloonSection')" title="Balloon Game"></span>
+            <span class="dot" onclick="scrollToSection('gameSection')" title="Catch Minigame"></span>
+            <span class="dot" onclick="scrollToSection('surpriseSection')" title="Surprise"></span>
+        </div>
+
+        <div class="scroll-container" id="scrollContainer">
+
+            <section id="cardSection" class="section">
+                <div class="card-container">
+                    <div class="card" id="birthdayCard">
+                        <div class="card-front">
+                            <h2>Tap to Open</h2>
+                            <div class="pulse-ring"></div>
+                        </div>
+                        <div class="card-inside glass-panel">
+                            <h2 class="typewriter" id="cardMsg1"></h2>
+                            <p class="typewriter delayed" id="cardMsg2"></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="cakeSection" class="section">
+                <div class="cake-container glass-panel">
+                    <h2 class="glow-title" id="wishTitle">Make a Wish!</h2>
+                    <div class="cake">
+                        <div class="layer layer-bottom"></div>
+                        <div class="layer layer-middle"></div>
+                        <div class="layer layer-top">
+                            <div class="candles" id="candles"></div>
+                        </div>
+                    </div>
+                    <p class="hint">Click the candles to blow them out, or try blowing into the mic!</p>
+                </div>
+            </section>
+
+            <section id="balloonSection" class="section">
+                <div class="balloon-game glass-panel">
+                    <h2>Pop the Balloons!</h2>
+                    <div class="score-board">Score: <span id="balloonScore">0</span></div>
+                    <div id="balloonArea" class="play-area"></div>
+                    <button class="futuristic-btn small" id="startBalloonBtn">Play Game</button>
+                </div>
+            </section>
+
+            <section id="gameSection" class="section">
+                <div class="catch-game glass-panel">
+                    <h2>Catch the Gifts!</h2>
+                    <div class="game-stats">
+                        <span>Score: <span id="catchScore">0</span></span>
+                        <span>Time: <span id="catchTime">30</span>s</span>
+                    </div>
+                    <div id="catchArea" class="play-area">
+                        <div id="basket"></div>
+                    </div>
+                    <button class="futuristic-btn small" id="startCatchBtn">Start Challenge</button>
+                </div>
+            </section>
+
+            <section id="surpriseSection" class="section">
+                <div class="gallery-container">
+                    <div class="slider" id="slider">
+                        <div class="slide"
+                            style="background: linear-gradient(135deg, rgba(255,0,127,0.6), rgba(127,0,255,0.6));">
+                            <p>A magical journey...</p>
+                        </div>
+                        <div class="slide"
+                            style="background: linear-gradient(135deg, rgba(0,240,255,0.6), rgba(0,255,127,0.6));">
+                            <p>The best memories...</p>
+                        </div>
+                        <div class="slide"
+                            style="background: linear-gradient(135deg, rgba(255,153,0,0.6), rgba(255,0,127,0.6));">
+                            <p>Always by my side...</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="surprise-box" id="surpriseBox">
+                    <button id="revealBtn" class="futuristic-btn">Reveal Final Surprise</button>
+                    <div id="finalMessage" class="hidden">
+                        <h1 class="super-glow">You deserve all happiness in the universe 💙</h1>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
